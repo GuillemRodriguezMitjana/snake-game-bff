@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:5173")
 @RequestMapping("/api/v1/player")
 public class PlayerController {
 
@@ -20,6 +19,7 @@ public class PlayerController {
 
     /**
      * Endpoint per crear un nou jugador.
+     * 
      * @param player Jugador (nom i puntuacions inicials)
      * @return Jugador creat
      */
@@ -30,9 +30,11 @@ public class PlayerController {
     }
 
     /**
-     * Endpoint per afegir una puntuació a un jugador existent o no. Si no existeix, el crea.
+     * Endpoint per afegir una puntuació a un jugador existent o no. Si no existeix,
+     * el crea.
+     * 
      * @param playerName Nom del jugador
-     * @param score Puntuació a afegir
+     * @param score      Puntuació a afegir
      * @return Jugador actualitzat
      */
     @PutMapping("/score")
@@ -43,6 +45,7 @@ public class PlayerController {
 
     /**
      * Endpoint per obtenir un jugador pel seu nom.
+     * 
      * @param name Nom del jugador
      * @return Jugador
      */
@@ -54,6 +57,7 @@ public class PlayerController {
 
     /**
      * Endpoint per obtenir tots els jugadors.
+     * 
      * @return Llista dels jugadors
      */
     @GetMapping("/all")
@@ -62,7 +66,9 @@ public class PlayerController {
     }
 
     /**
-     * Endpoint per obtenir tots els jugadors ordenats descendentment per la seva millor puntuació.
+     * Endpoint per obtenir tots els jugadors ordenats descendentment per la seva
+     * millor puntuació.
+     * 
      * @return Llista de jugadors ordenada per millor puntuació
      */
     @GetMapping("/top-scores")
