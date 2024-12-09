@@ -76,4 +76,19 @@ public class PlayerController {
         return ResponseEntity.ok(playerService.getTopPlayers());
     }
 
+    /**
+     * Endpoint per eliminar un jugador a partir del seu nom.
+     * 
+     * @param playerName Nom del jugador
+     */
+    @DeleteMapping("/delete/{playerName}")
+    public ResponseEntity<String> deletePlayer(@PathVariable String playerName) {
+        Optional<Player> player = playerService.getPlayerByName(playerName);
+        if (player.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        playerService.deletePlayerByName(player.get().getName());
+        return ResponseEntity.noContent().build();
+    }
+
 }

@@ -4,8 +4,8 @@ import daaw.snakegamebff.models.Player;
 import daaw.snakegamebff.repositories.PlayerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,6 +17,7 @@ public class PlayerService {
 
     /**
      * Funció per afegir un nou jugador.
+     * 
      * @param player Jugador a afegir (nom i puntuacions inicials)
      * @return Jugador afegit
      */
@@ -25,9 +26,11 @@ public class PlayerService {
     }
 
     /**
-     * Funció per afegir una nova puntuació a un jugador existent o no. Si no existeix, el crea.
+     * Funció per afegir una nova puntuació a un jugador existent o no. Si no
+     * existeix, el crea.
+     * 
      * @param playerName Nom del jugador
-     * @param score Puntuació a afegir
+     * @param score      Puntuació a afegir
      * @return Jugador actualitzat
      */
     public Player addScore(String playerName, int score) {
@@ -43,6 +46,7 @@ public class PlayerService {
 
     /**
      * Funció per obtenir les dades d'un jugador a partir del seu nom.
+     * 
      * @param playerName Nom del jugador
      * @return Jugador (opcional)
      */
@@ -52,6 +56,7 @@ public class PlayerService {
 
     /**
      * Funció per obtenir tots els jugadors.
+     * 
      * @return Llista amb els jugadors
      */
     public List<Player> getAllPlayers() {
@@ -59,7 +64,9 @@ public class PlayerService {
     }
 
     /**
-     * Funció per obtenir els jugadors ordenats per la seva millor puntuació (descendent)
+     * Funció per obtenir els jugadors ordenats per la seva millor puntuació
+     * (descendent)
+     * 
      * @return Llista de jugadors ordenada per puntuació
      */
     public List<Player> getTopPlayers() {
@@ -70,6 +77,16 @@ public class PlayerService {
         players.sort((player1, player2) -> Integer.compare(player2.getBestScore(), player1.getBestScore()));
 
         return players;
+    }
+
+    /**
+     * Funció per eliminar un jugador a partir del seu nom.
+     * 
+     * @param playerName Nom del jugador
+     */
+    @Transactional
+    public void deletePlayerByName(String playerName) {
+        playerRepository.deleteByName(playerName);
     }
 
 }
